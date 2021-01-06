@@ -8,7 +8,12 @@ import { Link } from "react-router-dom";
 export const EditContact = props => {
 	const { store, actions } = useContext(GlobalState);
 
-	const [contact, setContact] = useState({});
+	const [contact, setContact] = useState({
+		name: "",
+		email: "",
+		phone: "",
+		address: ""
+	});
 	return (
 		<div className="container">
 			<div>
@@ -18,9 +23,10 @@ export const EditContact = props => {
 						<label>Full Name</label>
 						<input
 							type="text"
-							value={store.agenda.full_name}
+							value={store.full_name}
 							className="form-control"
 							placeholder="full name"
+							onChange={e => setContact({ ...contact, name: e.target.value })}
 						/>
 					</div>
 					<div className="form-group">
