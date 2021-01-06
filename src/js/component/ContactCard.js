@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import MikePhoto from "../../img/m101.jpg";
@@ -9,6 +9,7 @@ export const ContactCard = props => {
 	const [state, setState] = useState({
 		//initialize state here
 	});
+	const { store, actions } = useContext(GlobalState);
 
 	return (
 		<li className="list-group-item">
@@ -23,7 +24,8 @@ export const ContactCard = props => {
 								<i className="fas fa-pencil-alt mr-3" />
 							</button>
 						</Link>
-						<button className="btn" onClick={() => props.onDelete()}>
+						<button className="btn" onClick={() => props.onDelete(props)}>
+							{console.log(props.propContact.id)}
 							<i className="fas fa-trash-alt" />
 						</button>
 					</div>

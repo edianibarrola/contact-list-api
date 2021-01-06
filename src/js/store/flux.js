@@ -96,6 +96,34 @@ const getState = ({ getStore, setStore }) => {
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
+			},
+			removeContact: id => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+					method: "DELETE"
+				})
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(jsonifiedResponse => {
+						console.log(jsonifiedResponse);
+						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Edian")
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								return response.json();
+							})
+							.then(jsonifiedResponse => setStore({ agenda: jsonifiedResponse }))
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
 			}
 		}
 	};
