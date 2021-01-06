@@ -5,17 +5,23 @@ import { Link } from "react-router-dom";
 //editable contact fields with prepopulated input
 // statehook for input tracking
 
-export const EditContact = () => {
+export const EditContact = props => {
 	const { store, actions } = useContext(GlobalState);
+
 	const [contact, setContact] = useState({});
 	return (
 		<div className="container">
 			<div>
-				<h1 className="text-center mt-5">Add a new contact</h1>
+				<h1 className="text-center mt-5">Edit Contact</h1>
 				<form>
 					<div className="form-group">
 						<label>Full Name</label>
-						<input type="text" className="form-control" placeholder="Full Name" />
+						<input
+							type="text"
+							value={store.agenda.full_name}
+							className="form-control"
+							placeholder="full name"
+						/>
 					</div>
 					<div className="form-group">
 						<label>Email</label>
