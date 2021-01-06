@@ -17,6 +17,46 @@ const getState = ({ getStore, setStore }) => {
 					.catch(function(error) {
 						console.log("Looks like there was a problem: \n", error);
 					});
+			},
+
+			updateContactList: data => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/" + data.id, {
+					method: "PUT", // or 'POST'
+					body: JSON.stringify({
+						full_name: data.name,
+						email: data.email,
+						agenda_slug: "Edian",
+						address: data.address,
+						phone: data.phone
+					}), // data can be `string` or {object}!
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+					.then(function(response) {
+						if (!response.ok) {
+							throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then(jsonifiedResponse => {
+						console.log(jsonifiedResponse);
+
+						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Edian")
+							.then(function(response) {
+								if (!response.ok) {
+									throw Error(response.statusText);
+								}
+								return response.json();
+							})
+							.then(jsonifiedResponse => setStore({ agenda: jsonifiedResponse }))
+							.catch(function(error) {
+								console.log("Looks like there was a problem: \n", error);
+							});
+					})
+					.catch(function(error) {
+						console.log("Looks like there was a problem: \n", error);
+					});
 			}
 		}
 	};
