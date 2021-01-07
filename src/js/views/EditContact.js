@@ -72,12 +72,14 @@ export const EditContact = props => {
 							name="address"
 						/>
 					</div>
-					<button
-						type="button"
-						className="btn btn-primary form-control"
-						onClick={() => actions.updateContactList(contact)}>
-						save
-					</button>
+					<Link to="/">
+						<button
+							type="button"
+							className="btn btn-primary form-control"
+							onClick={() => actions.updateContactList(contact)}>
+							save
+						</button>
+					</Link>
 					<Link className="mt-3 w-100 text-center" to="/">
 						or get back to contacts
 					</Link>
