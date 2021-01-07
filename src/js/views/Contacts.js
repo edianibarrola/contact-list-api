@@ -34,10 +34,11 @@ export const Contacts = () => {
 									console.log("CONTACT:::", contact);
 									if (contact) {
 										if (
-											contact.full_name.toLowerCase().includes(state.searchInput.toLowerCase()) ||
-											contact.address.toLowerCase().includes(state.searchInput.toLowerCase()) ||
-											contact.phone.toLowerCase().includes(state.searchInput.toLowerCase()) ||
-											contact.email.toLowerCase().includes(state.searchInput.toLowerCase())
+											state.searchInput &&
+											(contact.full_name.includes(state.searchInput) ||
+												contact.address.includes(state.searchInput) ||
+												contact.phone.includes(state.searchInput) ||
+												contact.email.includes(state.searchInput))
 										) {
 											return (
 												<ContactCard
@@ -55,7 +56,13 @@ export const Contacts = () => {
 												/>
 											);
 										} else {
-											return null;
+											return (
+												<ContactCard
+													key={index}
+													propContact={contact}
+													onDelete={() => setState({ showModal: true, id: contact.id })}
+												/>
+											);
 										}
 									}
 							  })

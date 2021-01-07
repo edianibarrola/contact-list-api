@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { GlobalState } from "../store/appContext";
 
@@ -35,6 +35,7 @@ export const Modal = props => {
 						<button type="button" className="btn btn-primary" onClick={() => props.onClose()}>
 							Oh no!
 						</button>
+
 						<button
 							type="button"
 							className="btn btn-secondary"
