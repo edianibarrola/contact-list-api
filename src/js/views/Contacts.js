@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { GlobalState } from "../store/appContext";
 import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
+import { Searchbar } from "../component/Searchbar";
 
 export const Contacts = () => {
 	const { store, actions } = useContext(GlobalState);
@@ -18,6 +19,8 @@ export const Contacts = () => {
 					<Link className="btn btn-success" to="/add">
 						Add new contact
 					</Link>
+
+					<Searchbar agenda={store.agenda} />
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
