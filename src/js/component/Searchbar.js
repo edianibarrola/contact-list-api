@@ -9,9 +9,18 @@ export const Searchbar = () => {
 	const [searchInput, setSearchInput] = useState({
 		currentInput: ""
 	});
+	const [filteredAgenda, setFilteredAgenda] = useState({
+		filtered: []
+	});
 
 	const handleChange = e => {
 		setSearchInput({ ...searchInput, [e.target.name]: e.target.value });
+		setFilteredAgenda({
+			filtered: store.agenda.filter(contact => {
+				return contact.full_name.toLowerCase().includes(searchInput.currentInput.toLowerCase());
+				console.log("CONTACT: " + contact);
+			})
+		});
 	};
 
 	return (
