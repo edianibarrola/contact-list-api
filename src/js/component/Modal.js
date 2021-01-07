@@ -39,7 +39,7 @@ export const Modal = props => {
 							type="button"
 							className="btn btn-secondary"
 							data-dismiss="modal"
-							onClick={() => actions.removeContact(state.id)}>
+							onClick={() => actions.removeContact(props.id)}>
 							Do it!
 						</button>
 					</div>
@@ -56,7 +56,8 @@ Modal.propTypes = {
 	history: PropTypes.object,
 	onClose: PropTypes.func,
 	show: PropTypes.bool,
-	propContact: PropTypes.object
+	propContact: PropTypes.object,
+	id: PropTypes.string
 };
 
 /**
