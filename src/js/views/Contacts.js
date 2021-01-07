@@ -9,8 +9,13 @@ export const Contacts = () => {
 	const { store, actions } = useContext(GlobalState);
 	const [state, setState] = useState({
 		showModal: false,
-		id: null
+		id: null,
+		searchInput: ""
 	});
+	//set searchInput with value Function
+	const setSearchInput = e => {
+		setState({ ...state, searchInput: e.target.value });
+	};
 
 	return (
 		<div className="container">
@@ -20,19 +25,39 @@ export const Contacts = () => {
 						Add new contact
 					</Link>
 
-					<Searchbar agenda={store.agenda} />
+					<Searchbar agenda={store.agenda} prop={setSearchInput} searchInput={state.searchInput} />
 				</p>
 				<div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
 					<ul className="list-group pull-down" id="contact-list">
 						{store.agenda
 							? store.agenda.map((contact, index) => {
-									return (
-										<ContactCard
-											key={index}
-											propContact={contact}
-											onDelete={() => setState({ showModal: true, id: contact.id })}
-										/>
-									);
+									console.log("CONTACT:::", contact);
+									if (contact) {
+										if (
+											contact.full_name.toLowerCase().includes(state.searchInput.toLowerCase()) ||
+											contact.address.toLowerCase().includes(state.searchInput.toLowerCase()) ||
+											contact.phone.toLowerCase().includes(state.searchInput.toLowerCase()) ||
+											contact.email.toLowerCase().includes(state.searchInput.toLowerCase())
+										) {
+											return (
+												<ContactCard
+													key={index}
+													propContact={contact}
+													onDelete={() => setState({ showModal: true, id: contact.id })}
+												/>
+											);
+										} else if (state.searchInput == "") {
+											return (
+												<ContactCard
+													key={index}
+													propContact={contact}
+													onDelete={() => setState({ showModal: true, id: contact.id })}
+												/>
+											);
+										} else {
+											return null;
+										}
+									}
 							  })
 							: "loading"}
 					</ul>
