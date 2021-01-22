@@ -22,7 +22,7 @@ const getState = ({ getStore, setStore }) => {
 			},
 
 			updateContactList: data => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/" + data.id, {
+				fetch(getStore().getURL + "/" + data.id, {
 					method: "PUT", // or 'POST'
 					body: JSON.stringify({
 						full_name: data.name,
@@ -44,7 +44,7 @@ const getState = ({ getStore, setStore }) => {
 					.then(jsonifiedResponse => {
 						console.log(jsonifiedResponse);
 
-						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Edian")
+						fetch(getStore().getURL)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
@@ -61,7 +61,7 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 			addNewContact: data => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+				fetch(getStore().getURL, {
 					method: "POST", // or 'POST'
 					body: JSON.stringify({
 						full_name: data.name,
@@ -83,7 +83,7 @@ const getState = ({ getStore, setStore }) => {
 					.then(jsonifiedResponse => {
 						console.log(jsonifiedResponse);
 
-						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Edian")
+						fetch(getStore().getURL)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
@@ -100,7 +100,7 @@ const getState = ({ getStore, setStore }) => {
 					});
 			},
 			removeContact: id => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/" + id, {
+				fetch(getStore().getURL + "/" + id, {
 					method: "DELETE"
 				})
 					.then(function(response) {
@@ -111,7 +111,7 @@ const getState = ({ getStore, setStore }) => {
 					})
 					.then(jsonifiedResponse => {
 						console.log(jsonifiedResponse);
-						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Edian")
+						fetch(getStore().getURL)
 							.then(function(response) {
 								if (!response.ok) {
 									throw Error(response.statusText);
