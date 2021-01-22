@@ -1,12 +1,14 @@
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
-			agenda: null
+			agenda: null,
+			getURL: "https://3000-b4fddd71-b34f-4f7c-b081-b223b4f2ea57.ws-us03.gitpod.io/contacts"
 			//Your data structures, A.K.A Entities
 		},
+
 		actions: {
 			loadInitialData: () => {
-				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/Edian")
+				fetch(getStore().getURL)
 					.then(function(response) {
 						if (!response.ok) {
 							throw Error(response.statusText);
